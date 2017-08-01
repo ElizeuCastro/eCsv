@@ -2,10 +2,7 @@ package com.ecsv.run.parser;
 
 import com.ecsv.run.domain.City;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,10 +19,10 @@ public final class CsvParser {
         return instance;
     }
 
-    public List<City> cities(final File file) {
+    public List<City> cities(final InputStream file) {
         final List<City> cities = new ArrayList<>();
         try {
-            final BufferedReader reader = new BufferedReader(new FileReader(file));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(file));
             String line;
             reader.readLine();
             while ((line = reader.readLine()) != null) {

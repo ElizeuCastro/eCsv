@@ -4,29 +4,18 @@ import com.ecsv.run.parser.CsvParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 
-import static java.util.Objects.isNull;
 import static junit.framework.TestCase.assertEquals;
 
 public class CsvParserTest {
 
-    File file;
+    InputStream file;
 
     @Before
     public void setUp() {
-        try {
-            final URL resource = getClass().getClassLoader().getResource("cidades.csv");
-            if (isNull(resource)) {
-                throw new IllegalArgumentException("file not found.");
-            }
-            file = new File(resource.toURI());
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("file not found.");
-        }
+        file = getClass().getResourceAsStream("cidades.csv");
     }
 
     @Test

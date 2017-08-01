@@ -1,6 +1,5 @@
 package com.ecsv.run.command;
 
-import com.ecsv.run.domain.AbstractDomain;
 import com.ecsv.run.domain.City;
 
 import java.lang.reflect.Field;
@@ -27,7 +26,7 @@ public class CommandCountDistinct implements Command<Integer> {
         System.out.println(count);
     }
 
-    private Function<AbstractDomain, Object> mapByField(final String property) {
+    private Function<City, Object> mapByField(final String property) {
         return object -> {
             try {
                 final Field f = object.getClass().getDeclaredField(property);

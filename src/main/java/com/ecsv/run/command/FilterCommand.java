@@ -1,6 +1,5 @@
 package com.ecsv.run.command;
 
-import com.ecsv.run.domain.AbstractDomain;
 import com.ecsv.run.domain.City;
 
 import java.lang.reflect.Field;
@@ -34,7 +33,7 @@ public class FilterCommand implements Command<List<City>> {
         }
     }
 
-    private Predicate<AbstractDomain> filterByFieldAndValue(final String property, final String value) {
+    private Predicate<City> filterByFieldAndValue(final String property, final String value) {
         return object -> {
             try {
                 final Field f = object.getClass().getDeclaredField(property);

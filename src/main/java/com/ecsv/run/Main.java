@@ -5,10 +5,8 @@ import com.ecsv.run.command.CommandFactory;
 import com.ecsv.run.domain.City;
 import com.ecsv.run.parser.CsvParser;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,15 +30,11 @@ public class Main {
         }
     }
 
-    private File getFile() {
-        try {
-            final URL resource = getClass().getClassLoader().getResource("cidades.csv");
-            if (isNull(resource)) {
-                throw new IllegalArgumentException("file not found.");
-            }
-            return new File(resource.toURI());
-        } catch (URISyntaxException e) {
+    private InputStream getFile() {
+        final InputStream resource = getClass().getClassLoader().getResourceAsStream("cidades.csv");
+        if (isNull(resource)) {
             throw new IllegalArgumentException("file not found.");
         }
+        return resource;
     }
 }

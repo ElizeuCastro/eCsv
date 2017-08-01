@@ -2,7 +2,7 @@ package com.ecsv.run.domain;
 
 import java.util.Arrays;
 
-public class City extends AbstractDomain{
+public class City {
 
     private Long ibge_id;
     private String uf;
