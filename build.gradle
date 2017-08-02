@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+test {
+    include '/**'
+}
+
 jar {
     manifest {
         attributes(
