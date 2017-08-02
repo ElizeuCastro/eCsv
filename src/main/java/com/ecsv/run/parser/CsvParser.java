@@ -6,10 +6,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class CsvParser {
 
-
+    private static final Logger logger = Logger.getLogger(CsvParser.class.getName());
     private static CsvParser instance;
 
     public static CsvParser getInstance() {
@@ -21,8 +23,9 @@ public final class CsvParser {
 
     public List<City> cities(final InputStream file) {
         final List<City> cities = new ArrayList<>();
+        BufferedReader reader = null;
         try {
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(file));
+            reader = new BufferedReader(new InputStreamReader(file));
             String line;
             reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -39,7 +42,15 @@ public final class CsvParser {
                         fields[9]));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "and exception ", e);
+        } finally {
+            try {
+                if (Objects.nonNull(reader)) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "and exception ", e);
+            }
         }
         return cities;
     }
